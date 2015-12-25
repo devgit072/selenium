@@ -1,0 +1,7 @@
+<suite name="Group of group Suite" parallel="none">
+    <test name="Group of group Test">
+        <classes>
+            <class name="SampleTest" />
+        </classes>
+    </test>
+</suite>
