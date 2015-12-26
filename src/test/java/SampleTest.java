@@ -3,8 +3,11 @@ import com.devrajs.practice.selenium.pages.gmail.InboxPage;
 import entity.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.devrajs.practice.selenium.pages.gmail.SignIn;
 
@@ -15,13 +18,23 @@ import com.devrajs.practice.selenium.pages.gmail.SignIn;
 
 public class SampleTest {
     static final long DEFAULT_TIMEOUT=20;
+    WebDriver webDriver;
 
-    //@Test
+    @BeforeClass
+    void initClass()
+    {
+        webDriver = new FirefoxDriver();
+    }
+    @AfterClass
+    void finish()
+    {
+        webDriver.quit();
+    }
+    @Test
     public void testLogin()
     {
-        WebDriver webDriver=null;
         try {
-            webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -38,22 +51,24 @@ public class SampleTest {
             InboxPage inboxPage = InboxPage.getInstance(webDriver);
             WebElement composeButton = inboxPage.getComposeButton(true);
             Assert.assertNotNull(composeButton, "Compose button not found");
-            webDriver.quit();
+            webDriver.close();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Assert.fail(e.getMessage());
-            webDriver.quit();
+            webDriver.close();
+        }
+        finally {
+            webDriver.close();
         }
     }
 
-    //@Test
+    @Test
     public void testLoginWithWrongUserId()
     {
-        WebDriver webDriver=null;
         try {
-            webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -63,22 +78,25 @@ public class SampleTest {
             userId.sendKeys("gghhah76678671wghjgjghjhajdev098");
             WebElement password = signIn.getPassword(true, true);
             Assert.assertNull(password, "password text area present");
-            webDriver.quit();
+            webDriver.close();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Assert.fail(e.getMessage());
-            webDriver.quit();
+            webDriver.close();
+        }
+        finally {
+            webDriver.close();
         }
     }
 
-    //@Test
+    @Test
     public void testWithWrongPassword()
     {
-        WebDriver webDriver=null;
+        //WebDriver webDriver=null;
         try {
-            webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -96,22 +114,25 @@ public class SampleTest {
             Assert.assertNotNull(errorMsg,"Error message not present");
             Assert.assertEquals(errorMsg.getText().trim(), "The email and password you entered don't match.");
             //verify inbox field present
-            webDriver.quit();
+            webDriver.close();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Assert.fail(e.getMessage());
-            webDriver.quit();
+            webDriver.close();
+        }
+        finally {
+            webDriver.close();
         }
     }
 
-    //@Test
+    @Test
     public void testComposeMessage()
     {
-        WebDriver webDriver=null;
+        //WebDriver webDriver=null;
         try {
-            webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -137,25 +158,25 @@ public class SampleTest {
             messageBody.sendKeys("Hello dear...this is selenium...so be carefull...I'm learning it");
             WebElement sendButton = inboxPage.getSendButton(webDriver, true);
             sendButton.click();
-            webDriver.quit();
+            webDriver.close();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Assert.fail(e.getMessage());
-            webDriver.quit();
+            webDriver.close();
         }
         finally {
-            webDriver.quit();
+            webDriver.close();
         }
     }
 
     @Test
     public void loginAndLogout()
     {
-        WebDriver webDriver=null;
+        //WebDriver webDriver=null;
         try {
-            webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -177,16 +198,16 @@ public class SampleTest {
             //verify signIn button is present
             submitButton = signIn.getLoginSubmit(true, false);
             Assert.assertNotNull(submitButton, "Login submit button is not present");
-            webDriver.quit();
+            webDriver.close();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Assert.fail(e.getMessage());
-            webDriver.quit();
+            webDriver.close();
         }
         finally {
-            webDriver.quit();
+            webDriver.close();
         }
     }
 
