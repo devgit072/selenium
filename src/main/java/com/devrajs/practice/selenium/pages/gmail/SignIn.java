@@ -9,10 +9,9 @@ import org.openqa.selenium.WebElement;
  * Created by devraj.singh on 12/25/15.
  */
 public class SignIn {
-    private static SignIn instance;
     WebDriver webDriver;
 
-    private SignIn(WebDriver wb, String url)
+    public SignIn(WebDriver wb, String url)
     {
         try
         {
@@ -23,13 +22,6 @@ public class SignIn {
         {
             e.printStackTrace();
         }
-    }
-    public static SignIn getInstance(WebDriver webDriver, String url)
-    {
-        if(instance==null) {
-            instance = new SignIn(webDriver, url);
-        }
-        return instance;
     }
 
     public WebElement getUserId(boolean wait, boolean suppressException)

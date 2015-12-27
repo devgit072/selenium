@@ -10,19 +10,12 @@ import org.openqa.selenium.WebElement;
  */
 public class InboxPage {
 
-    private static WebDriver webDriver;
-    private static InboxPage instance;
-    private InboxPage(WebDriver wb)
+    private WebDriver webDriver;
+    public InboxPage(WebDriver wb)
     {
         this.webDriver=wb;
     }
-    public static InboxPage getInstance(WebDriver wb)
-    {
-        if(instance==null) {
-            instance = new InboxPage(wb);
-        }
-        return instance;
-    }
+
     public WebElement getInboxButton(boolean wait)
     {
         try {
