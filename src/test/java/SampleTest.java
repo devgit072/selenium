@@ -3,7 +3,6 @@ import com.devrajs.practice.selenium.pages.gmail.InboxPage;
 import entity.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -18,6 +17,7 @@ import com.devrajs.practice.selenium.pages.gmail.SignIn;
 
 public class SampleTest {
     static final long DEFAULT_TIMEOUT=20;
+    private static Browser browser=Browser.Chrome;
 
     @BeforeClass
     void initClass()
@@ -30,8 +30,9 @@ public class SampleTest {
     @Test
     public void testLogin()
     {
-        WebDriver webDriver = new FirefoxDriver();
+        WebDriver webDriver=null;
         try {
+            webDriver = WebUtil.getWebdriver(browser);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -64,8 +65,9 @@ public class SampleTest {
     @Test
     public void testLoginWithWrongUserId()
     {
-        WebDriver webDriver = new FirefoxDriver();
+        WebDriver webDriver=null;
         try {
+            webDriver = WebUtil.getWebdriver(browser);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -91,9 +93,9 @@ public class SampleTest {
     @Test
     public void testWithWrongPassword()
     {
-        WebDriver webDriver = new FirefoxDriver();
+        WebDriver webDriver=null;
         try {
-            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            webDriver = WebUtil.getWebdriver(browser);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -127,9 +129,9 @@ public class SampleTest {
     @Test
     public void testComposeMessage()
     {
-        WebDriver webDriver = new FirefoxDriver();
+        WebDriver webDriver=null;
         try {
-            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            webDriver = WebUtil.getWebdriver(browser);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser
@@ -171,9 +173,9 @@ public class SampleTest {
     @Test
     public void loginAndLogout()
     {
-        WebDriver webDriver = new FirefoxDriver();
+        WebDriver webDriver=null;
         try {
-            //webDriver = WebUtil.getWebdriver(Browser.Firefox);
+            webDriver = WebUtil.getWebdriver(browser);
             WebUtil.maximizeWindow(webDriver);
             WebDriverWait webDriverWait = new WebDriverWait(webDriver,DEFAULT_TIMEOUT);
             //open browser

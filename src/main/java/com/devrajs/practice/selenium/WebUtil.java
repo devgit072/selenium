@@ -23,8 +23,11 @@ public class WebUtil {
         WebDriver webDriver;
         if(browser==Browser.Firefox)
             webDriver = new FirefoxDriver();
-        else if(browser==Browser.Chrome)
+        else if(browser==Browser.Chrome) {
+            String chromedriver = WebUtil.class.getClassLoader().getResource("chromedriver").getPath();
+            System.setProperty("webdriver.chrome.driver",chromedriver);
             webDriver = new ChromeDriver();
+        }
         else
             throw new BrowserNotSupportedException(browser.name() + " not supported!!");
         return webDriver;
